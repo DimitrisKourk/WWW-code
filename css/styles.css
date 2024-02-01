@@ -1,0 +1,268 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body,
+html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
+body {
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(255, 251, 255),
+    rgb(5, 0, 5)
+  );
+  background-attachment: fixed;
+}
+.grid {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 25% 75%;
+  grid-template-rows:
+    min-content
+    min-content
+    auto
+    min-content;
+  grid-template-areas:
+    "header header"
+    "nav nav"
+    "aside main"
+    "footer footer";
+}
+header,
+nav,
+aside,
+main,
+footer {
+  border: 1px solid black;
+}
+
+header {
+  grid-area: header;
+}
+nav {
+  grid-area: nav;
+}
+aside {
+  grid-area: aside;
+  border-right: none;
+}
+main {
+  grid-area: main;
+  border-left: none;
+}
+footer {
+  grid-area: footer;
+}
+
+.header .logo img {
+  float: left;
+  width: 20vh;
+  height: 20vh;
+}
+
+.header .user p {
+  float:right;
+  font-size:xx-large;
+  font-family: "Bebas Neue", sans-serif;
+  margin-top:8vh;
+  margin-bottom: 8vh;
+  margin-right: 3vh;
+}
+
+nav {
+  text-align: center;
+}
+nav ul {
+  display: inline-block;
+  font-family: "Bebas Neue", sans-serif;
+}
+nav ul li {
+  float: left;
+  list-style: none;
+  width: fit-content;
+  margin-inline: 5vw;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  font-size: larger;
+}
+nav ul li:hover {
+  text-decoration: underline;
+  font-size: larger;
+  font-weight: bold;
+}
+
+.aside div ul li {
+  font-size: large;
+  font-family: "Bebas Neue", sans-serif;
+  background-image: linear-gradient(
+    to right,
+    rgb(52, 44, 44),
+    rgb(255, 255, 255)
+  );
+  list-style: none;
+  width: fit-content;
+  border: 1px solid black;
+  padding-inline-start: 5vw;
+  padding-inline-end: 1vw;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+}
+
+.aside div ul li:hover {
+  border: 2px solid black;
+  text-decoration: underline;
+  font-size: large;
+  font-weight: bold;
+  text-align: left;
+  width: 18.65vw;
+}
+
+.hidden {
+  display: none;
+}
+
+.main div h1{
+  font-family: "Bebas Neue", sans-serif;
+  font-size: xx-large;
+}
+
+.text{
+  padding: 8px;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: medium;
+  text-align: left;
+}
+
+.photorow{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+.photocolumn{
+  flex: 30%;
+  max-width: 30%;
+  padding: 0 4px;
+}
+
+.photocolumn img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media (max-width: 1300px) {
+  .photocolumn {
+    flex: 40%;
+    max-width: 40%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media (max-width: 1081px) {
+  .photocolumn {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
+
+table {
+  margin: auto;
+  width:95%;
+  max-width: auto;
+  max-height: auto;
+  border-collapse: collapse;
+  border: 1px solid black;
+  overflow: auto;
+}
+
+th,td {
+  min-width: 50px;
+  text-align: left;
+  padding: 5px;
+  font-family: "Bebas Neue", sans-serif;
+}
+
+tr:nth-child(even) {
+  background-color: lightgray;
+}
+tr:hover {
+  background-color: lightblue;
+}
+tr.selected{
+  background-color: lightgreen;
+}
+th {
+  background-color: gray;
+  color: white;
+}
+
+input {
+  margin: 0;
+  width: auto;
+}
+
+#SongsForm {
+  /*  border:1px solid black; */
+   background-color: lightgrey;
+   padding: 5px;
+   margin-right: 5px;
+   display: grid;
+   grid-template-columns: 1fr 4fr;
+ }
+ 
+ #SongsForm * {
+   padding: 3px;
+   margin: 3px;
+   ;
+ }
+ 
+ #toolbar {
+   margin: auto;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   flex-wrap: wrap;
+ }
+ 
+ #toolbar * {
+   margin: 5px;
+ }
+
+#LinksForm {
+  /*  border:1px solid black; */
+   background-color: lightgrey;
+   padding: 5px;
+   display: grid;
+   grid-template-columns: 1fr 4fr;
+ }
+ 
+ #LinksForm * {
+   padding: 3px;
+   margin: 3px;
+   ;
+ }
+ 
+ #toolbarLinks {
+   margin: auto;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   flex-wrap: wrap;
+ }
+ 
+ #toolbarLinks * {
+   margin: 5px;
+ }
+
+ .footer{
+  font-family: "Bebas Neue", sans-serif;
+  font-size: medium;
+}
