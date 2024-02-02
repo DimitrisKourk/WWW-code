@@ -162,7 +162,6 @@ async function getLinks(req, res) {
 }
 async function getLinksType(req, res) {
   const type = req.params.type;
-  console.log(type);
   const values = [type];
   const text = `SELECT * FROM Links WHERE Type = ? ORDER BY id`;
   return connection.query(text, values, (error, results) => {
