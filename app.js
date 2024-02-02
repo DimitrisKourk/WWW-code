@@ -9,11 +9,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(__dirname +"/images"));
 
-app.set("view engine", "pug");
-app.set("views", __dirname + "/views");
 app.use("/css", express.static("css"));
 app.use("/js", express.static("js"));
-app.use("/texts", express.static("texts"));
 app.get("/", (request, response) => {
   response.sendFile(__dirname + '/index.html');
 });
