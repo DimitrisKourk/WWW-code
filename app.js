@@ -157,6 +157,14 @@ async function getLinksType(req, res) {
   const values = [type];
   const text = `SELECT * FROM Links WHERE Type = ? ORDER BY id`;
   return connection.query(text, values, (error, results) => {
+    connection.end((error) => {
+      if (error) {
+        console.error("Error closing MySQL connection:", error);
+        return;
+      }
+
+      console.log("MySQL connection closed.");
+    });
     showResults(res, error, results);
   });
 }
