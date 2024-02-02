@@ -112,40 +112,6 @@ credentials = {
   password: "u3pzqNXXEZ",
   port: 3306,
 };
-const connection = mysql.createConnection(credentials);
-
-connection.connect(function (err) {
-  if (err) {
-    console.error("error connecting: " + err.stack);
-    return;
-  }
-  console.log("connected as id " + connection.threadId);
-});
-
-function handleDisconnect() {
-  connection = mysql.createConnection(credentials); // Recreate the connection, since
-  // the old one cannot be reused.
-  connection.connect(function (err) {
-    // The server is either down
-    if (err) {
-      // or restarting (takes a while sometimes).
-      console.log("error when connecting to db:", err);
-      setTimeout(handleDisconnect, 2000); // We introduce a delay before attempting to reconnect,
-    } // to avoid a hot loop, and to allow our node script to
-  }); // process asynchronous requests in the meantime.
-  // If you're also serving http, display a 503 error.
-
-  connection.on("error", function (err) {
-    console.log("db error", err);
-    if (err.code === "PROTOCOL_CONNECTION_LOST") {
-      // Connection to the MySQL server is usually
-      handleDisconnect(); // lost due to either server restart, or a
-    } else {
-      // connnection idle timeout (the wait_timeout
-      throw err; // server variable configures this)
-    }
-  });
-}
 
 const showResults = (response, error, results) => {
   if (error) {
@@ -155,12 +121,30 @@ const showResults = (response, error, results) => {
   response.status(200).json(results);
 };
 async function getLinks(req, res) {
+  var connection = mysql.createConnection(credentials);
+
+  connection.connect(function (err) {
+    if (err) {
+      console.error("error connecting: " + err.stack);
+      return;
+    }
+    console.log("connected as id " + connection.threadId);
+  });
   const text = `SELECT * FROM Links ORDER BY id`;
   connection.query(text, (error, results) => {
     showResults(res, error, results);
   });
 }
 async function getLinksType(req, res) {
+  var connection = mysql.createConnection(credentials);
+
+  connection.connect(function (err) {
+    if (err) {
+      console.error("error connecting: " + err.stack);
+      return;
+    }
+    console.log("connected as id " + connection.threadId);
+  });
   const type = req.params.type;
   const values = [type];
   const text = `SELECT * FROM Links WHERE Type = ? ORDER BY id`;
@@ -170,6 +154,15 @@ async function getLinksType(req, res) {
 }
 
 async function addLink(req, res) {
+  var connection = mysql.createConnection(credentials);
+
+  connection.connect(function (err) {
+    if (err) {
+      console.error("error connecting: " + err.stack);
+      return;
+    }
+    console.log("connected as id " + connection.threadId);
+  });
   const { id, name, url, type } = req.body;
   const values = [id, name, url, type];
   const text = `
@@ -184,6 +177,15 @@ async function addLink(req, res) {
 }
 
 async function updateLink(req, res) {
+  var connection = mysql.createConnection(credentials);
+
+  connection.connect(function (err) {
+    if (err) {
+      console.error("error connecting: " + err.stack);
+      return;
+    }
+    console.log("connected as id " + connection.threadId);
+  });
   const { id, name, url, type } = req.body;
   const values = [name, url, type, id];
   const text = `UPDATE Links 
@@ -199,6 +201,15 @@ async function updateLink(req, res) {
 }
 
 async function deleteLink(req, res) {
+  var connection = mysql.createConnection(credentials);
+
+  connection.connect(function (err) {
+    if (err) {
+      console.error("error connecting: " + err.stack);
+      return;
+    }
+    console.log("connected as id " + connection.threadId);
+  });
   const id = parseInt(req.body.id);
   const values = [id];
   const text = `DELETE FROM Links WHERE id = ?`;
