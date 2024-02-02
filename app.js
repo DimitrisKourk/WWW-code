@@ -134,6 +134,7 @@ function handleDisconnect() {
     } // to avoid a hot loop, and to allow our node script to
   }); // process asynchronous requests in the meantime.
   // If you're also serving http, display a 503 error.
+
   connection.on("error", function (err) {
     console.log("db error", err);
     if (err.code === "PROTOCOL_CONNECTION_LOST") {
@@ -149,7 +150,7 @@ function handleDisconnect() {
 const showResults = (response, error, results) => {
   if (error) {
     console.log(error);
-    results.status(200).json([]);
+    throw error;
   }
   response.status(200).json(results);
 };
