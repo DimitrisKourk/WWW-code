@@ -134,6 +134,14 @@ async function getLinks(req, res) {
   connection.query(text, (error, results) => {
     showResults(res, error, results);
   });
+  connection.end((error) => {
+    if (error) {
+      console.error("Error closing MySQL connection:", error);
+      return;
+    }
+
+    console.log("MySQL connection closed.");
+  });
 }
 async function getLinksType(req, res) {
   var connection = mysql.createConnection(credentials);
@@ -172,6 +180,14 @@ async function addLink(req, res) {
     if (error) {
       console.log(error);
     }
+    connection.end((error) => {
+      if (error) {
+        console.error("Error closing MySQL connection:", error);
+        return;
+      }
+
+      console.log("MySQL connection closed.");
+    });
     res.status(200).json(`Link added with ID: ${id}`);
   });
 }
@@ -196,6 +212,14 @@ async function updateLink(req, res) {
       res.status(200).json(error.message);
       return;
     }
+    connection.end((error) => {
+      if (error) {
+        console.error("Error closing MySQL connection:", error);
+        return;
+      }
+
+      console.log("MySQL connection closed.");
+    });
     res.status(200).json(`Link with ID: ${id} updated`);
   });
 }
@@ -218,6 +242,14 @@ async function deleteLink(req, res) {
       res.status(200).json(error);
       return;
     }
+    connection.end((error) => {
+      if (error) {
+        console.error("Error closing MySQL connection:", error);
+        return;
+      }
+
+      console.log("MySQL connection closed.");
+    });
     res.status(200).json(`Link with ID: ${id} deleted`);
   });
 }
